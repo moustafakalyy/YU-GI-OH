@@ -1,0 +1,2 @@
+# -Yu-GI-Oh-
+# YUGIOH

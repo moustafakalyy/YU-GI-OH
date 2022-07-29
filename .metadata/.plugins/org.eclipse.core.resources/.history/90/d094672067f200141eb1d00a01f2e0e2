@@ -1,0 +1,85 @@
+package eg.edu.guc.yugioh.gui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class DeckPanel1 extends JPanel{
+	
+	private JLabel deckLogo;
+	public DeckPanel1(){
+		this.setLayout(new BorderLayout());
+		
+		//cardsCount= new JLabel();
+		
+		//cardsCount.setText("cardcount");
+		deckLogo= new JLabel();
+		deckLogo.setText("deckPic");
+		
+		 //this.add(cardsCount);
+		 this.add(deckLogo, BorderLayout.CENTER);
+
+	}
+
+
+	public JLabel getDeckLogo() {
+		return deckLogo;
+	}
+	public void setDeckLogo(JLabel deckLogo) {
+		this.deckLogo = deckLogo;
+	}
+public void updateDeckPanel1(){
+	this.removeAll();
+	
+	
+	
+	deckLogo= new JLabel();
+	deckLogo.setOpaque(false);
+	deckLogo.setText(" " +(GUI.getStartFrame().getPlayer1().getField().getDeck().getDeck().size()));
+	deckLogo.setHorizontalTextPosition(JLabel.CENTER);
+	deckLogo.setVerticalTextPosition(JLabel.CENTER);
+	deckLogo.setForeground(Color.WHITE);
+	BufferedImage img =new BufferedImage(200, 100, BufferedImage.TYPE_INT_RGB);
+	try {
+	
+        img=ImageIO.read(new File("Card Back H .png"));}
+	
+	 catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+	ImageIcon x=new ImageIcon(FitImage(img, 100,200));
+	
+	deckLogo.setIcon( x );
+	
+	
+	
+	 this.add(deckLogo);
+	 this.validate();
+	
+}
+public static  BufferedImage FitImage( BufferedImage img ,int w,int h){
+BufferedImage img1=new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+Graphics2D g= img1.createGraphics();
+g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+g.drawImage(img, 0, 0, w, h , null );
+
+
+
+return img1;
+
+	
+
+}
+
+}
